@@ -21,6 +21,8 @@ typedef struct
     int volume_total;
 } Caminhao;
 
+
+
 double max(double a, double b)
 {
     return (a > b) ? a : b;
@@ -60,7 +62,6 @@ void removerPacote(Pacote pacotes[], int *total_pacotes, int indice)
     (*total_pacotes)--;
 }
 
-
 void prepararCaminhao(Caminhao *caminhao, Pacote pacotes[], int *total_pacotes)
 {
     int capacidade_peso = caminhao->peso;
@@ -76,11 +77,13 @@ void prepararCaminhao(Caminhao *caminhao, Pacote pacotes[], int *total_pacotes)
         }
     }
 
+   
+
     for (int i = 0; i <= (*total_pacotes); i++)
     {
         for (int w = 0; w <= capacidade_peso; w++)
-        { 
-            for (int v = 0; v <= capacidade_volume; v++)
+        {
+            for (int v = w; v <= capacidade_volume; v++)
             {
                 if (i == 0 || w == 0 || v == 0)
                 {
@@ -98,6 +101,7 @@ void prepararCaminhao(Caminhao *caminhao, Pacote pacotes[], int *total_pacotes)
             }
         }
     }
+    
 
     int i = (*total_pacotes);
     int w = capacidade_peso;
@@ -114,7 +118,6 @@ void prepararCaminhao(Caminhao *caminhao, Pacote pacotes[], int *total_pacotes)
             caminhao->peso_total += novo_pacote->peso;
             caminhao->volume_total += novo_pacote->volume;
 
-            
             removerPacote(pacotes, total_pacotes, i - 1);
 
             i--;
@@ -165,7 +168,6 @@ int main(int argc, char const *argv[])
         imprimirCaminhao(caminhoes[i], saida);
     }
 
-    
     double valor_pendente = 0;
     int quilos_pendentes = 0;
     int volume_pendente = 0;
